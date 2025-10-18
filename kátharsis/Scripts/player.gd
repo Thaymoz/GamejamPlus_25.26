@@ -99,6 +99,8 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 func add_ghost():
 	var ghost = ghost_node.instantiate()
+	var current_texture = texture.texture
+	var current_frame = texture.frame
 	ghost.set_property(position, (texture.scale*4))
 	get_tree().current_scene.add_child(ghost)
 

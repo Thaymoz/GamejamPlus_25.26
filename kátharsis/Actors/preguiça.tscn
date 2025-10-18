@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://dspq4yg5vnvx4"]
+
+[ext_resource type="Texture2D" uid="uid://c62pkpu7imtmq" path="res://Assets/Sprite Pack 2/8 - Comrade Cheese Puff/Tank_Movement (32 x 32) (1).png" id="1_240a8"]
+[ext_resource type="Script" uid="uid://dvnqpg0ordoc1" path="res://Scripts/preguiça.gd" id="1_gc4t0"]
+
+[sub_resource type="Animation" id="Animation_66j5m"]
+resource_name = "moving"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_udrbi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4dwg"]
+_data = {
+&"RESET": SubResource("Animation_udrbi"),
+&"moving": SubResource("Animation_66j5m")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_240a8"]
+size = Vector2(27, 17)
+
+[node name="preguiça" type="CharacterBody2D"]
+script = ExtResource("1_gc4t0")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_240a8")
+hframes = 12
+
+[node name="missle_point" type="Marker2D" parent="sprite"]
+position = Vector2(0, 6)
+
+[node name="bomb_point" type="Marker2D" parent="sprite"]
+position = Vector2(0, -1)
+
+[node name="anim_player" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u4dwg")
+}
+
+[node name="anim_tree" type="AnimationTree" parent="."]
+
+[node name="bomb_cd" type="Timer" parent="."]
+
+[node name="missle_cd" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -8.5)
+shape = SubResource("RectangleShape2D_240a8")
+
+[node name="wall_detector" type="RayCast2D" parent="."]
+position = Vector2(-1, -10)
+target_position = Vector2(-16, 0)

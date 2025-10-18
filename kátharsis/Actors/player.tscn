@@ -451,7 +451,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="ghost_timer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.1
 
 [node name="dash_particles" type="GPUParticles2D" parent="."]
 show_behind_parent = true
@@ -461,7 +461,7 @@ amount = 20
 process_material = SubResource("ParticleProcessMaterial_ks2ow")
 
 [node name="dash_cd" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 
 [connection signal="body_entered" from="texture/ab_hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
