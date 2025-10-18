@@ -70,6 +70,7 @@ libraries = {
 [node name="anim_tree" type="AnimationTree" parent="."]
 
 [node name="bomb_cd" type="Timer" parent="."]
+autostart = true
 
 [node name="missle_cd" type="Timer" parent="."]
 
@@ -80,3 +81,5 @@ shape = SubResource("RectangleShape2D_240a8")
 [node name="wall_detector" type="RayCast2D" parent="."]
 position = Vector2(-1, -10)
 target_position = Vector2(-16, 0)
+
+[connection signal="timeout" from="bomb_cd" to="." method="_on_bomb_cd_timeout"]

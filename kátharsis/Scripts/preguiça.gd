@@ -28,4 +28,13 @@ func throw_bomb():
 	var bomb_insntance = BOMB.instantiate()
 	add_sibling(bomb_insntance)
 	bomb_insntance.global_position = bomb_point.global_position
-	bomb_insntance.apply_impulse(Vector2(randi_range (direction * 30, direction * 200) , (randi_range(-200,-400))))
+	bomb_insntance.apply_impulse(Vector2(randi_range (direction * 400, direction * 800) , randi_range(-400,-800) ))
+
+func _on_bomb_cd_timeout() -> void:
+	throw_bomb()
+
+func lunch_missle():
+	var missle_instance = MISSLE.instantiate()
+	add_sibling(missle_instance)
+	missle_instance.global_position = missle_point.global_position
+	missle_instance.set_direction(direction)
