@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsn2ij26iveii"]
+[gd_scene load_steps=9 format=3 uid="uid://dsn2ij26iveii"]
 
 [ext_resource type="Texture2D" uid="uid://8ykislrf6tt" path="res://Assets/Assets Gamelab/Tilesets/Tilled_stone.png" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://c881hstf5vq36" path="res://Actors/player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://cweit6jntt5fc" path="res://Actors/cobaia.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://dspq4yg5vnvx4" path="res://Actors/preguiça.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://c4sh62y3byv4v" path="res://Prefarbs/bomb.tscn" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://d1hyawoa7w6t2" path="res://Prefarbs/missle.tscn" id="6_i6g32"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 texture = ExtResource("1_ebmjs")
@@ -95,3 +97,9 @@ scale = Vector2(4, 4)
 [node name="preguiça" parent="." instance=ExtResource("4_3dryh")]
 position = Vector2(1243, 896)
 scale = Vector2(4, 4)
+
+[node name="bomb" parent="." instance=ExtResource("5_wowpa")]
+position = Vector2(611, 532)
+
+[node name="missle" parent="." instance=ExtResource("6_i6g32")]
+position = Vector2(801, 704)

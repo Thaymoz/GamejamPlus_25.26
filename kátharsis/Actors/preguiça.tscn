@@ -45,6 +45,8 @@ _data = {
 size = Vector2(27, 17)
 
 [node name="preguiça" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_gc4t0")
 
 [node name="sprite" type="Sprite2D" parent="."]
@@ -53,9 +55,11 @@ texture = ExtResource("1_240a8")
 hframes = 12
 
 [node name="missle_point" type="Marker2D" parent="sprite"]
+unique_name_in_owner = true
 position = Vector2(0, 6)
 
 [node name="bomb_point" type="Marker2D" parent="sprite"]
+unique_name_in_owner = true
 position = Vector2(0, -1)
 
 [node name="anim_player" type="AnimationPlayer" parent="."]
