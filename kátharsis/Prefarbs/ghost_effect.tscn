@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxoyy4tq12qan"]
+
+[ext_resource type="Texture2D" uid="uid://b4nr0dpi2viwy" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Walk/Pri-Walk-SS.png" id="1_qldqd"]
+[ext_resource type="Script" uid="uid://dbhm42bcve3bi" path="res://Scripts/ghost_effect.gd" id="2_pi7ih"]
+
+[node name="ghost_effect" type="Sprite2D"]
+modulate = Color(0.156863, 0.156863, 0.156863, 0.647059)
+show_behind_parent = true
+scale = Vector2(4, 4)
+texture = ExtResource("1_qldqd")
+hframes = 8
+frame = 3
+script = ExtResource("2_pi7ih")

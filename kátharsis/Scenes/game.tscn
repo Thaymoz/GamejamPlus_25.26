@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsn2ij26iveii"]
+[gd_scene load_steps=6 format=3 uid="uid://dsn2ij26iveii"]
 
 [ext_resource type="Texture2D" uid="uid://8ykislrf6tt" path="res://Assets/Assets Gamelab/Tilesets/Tilled_stone.png" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://c881hstf5vq36" path="res://Actors/player.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://cweit6jntt5fc" path="res://Actors/cobaia.tscn" id="3_wrm1d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 texture = ExtResource("1_ebmjs")
@@ -84,3 +85,7 @@ layer_0/tile_data = PackedInt32Array(3932160, 524288, 1, 3932161, 524288, 1, 393
 
 [node name="player" parent="." instance=ExtResource("2_qxrlw")]
 position = Vector2(486, 534)
+
+[node name="cobaia" parent="." instance=ExtResource("3_wrm1d")]
+position = Vector2(1009, 921)
+scale = Vector2(4, 4)

@@ -1,13 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://c881hstf5vq36"]
+[gd_scene load_steps=20 format=3 uid="uid://c881hstf5vq36"]
 
 [ext_resource type="Texture2D" uid="uid://blycomvvkl60o" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Idle/Pri-Idle-SS.png" id="1_sor1j"]
 [ext_resource type="Script" uid="uid://c25hoy5iygade" path="res://Scripts/player.gd" id="1_y2lmi"]
+[ext_resource type="PackedScene" uid="uid://cxoyy4tq12qan" path="res://Prefarbs/ghost_effect.tscn" id="2_1c8hm"]
 [ext_resource type="Texture2D" uid="uid://b0f0uhnr6d7p0" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Jump/Pri-Jump-SS.png" id="3_xk7p5"]
 [ext_resource type="Texture2D" uid="uid://b4nr0dpi2viwy" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Walk/Pri-Walk-SS.png" id="4_xmrs8"]
 [ext_resource type="Texture2D" uid="uid://c0cuqwcsts6v3" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Attack_ref/spritesheet (1).png" id="5_l3d2q"]
+[ext_resource type="Texture2D" uid="uid://ba4vp6fpy3jgn" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Fall/Pri-fall.png" id="6_4bcxw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2lmi"]
-size = Vector2(10, 15)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bcxw"]
+size = Vector2(25.5, 7)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4bcxw"]
+radius = 7.375
 
 [sub_resource type="Animation" id="Animation_y2lmi"]
 resource_name = "idle"
@@ -60,6 +65,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("texture/ab_hitbox/ab_collision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_xk7p5"]
 length = 0.001
@@ -111,9 +128,22 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("texture/ab_hitbox/ab_collision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_4bcxw"]
 resource_name = "attack"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -148,7 +178,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(8, 0)]
+"values": [Vector2(6, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -157,15 +187,27 @@ tracks/3/path = NodePath("texture:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667, 0.8),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("texture/ab_hitbox/ab_collision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.343189),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_l3d2q"]
 resource_name = "jump"
-loop_mode = 1
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -209,10 +251,22 @@ tracks/3/path = NodePath("texture:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"times": PackedFloat32Array(0, 0.0666667, 0.166667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("texture/ab_hitbox/ab_collision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_1c8hm"]
@@ -266,32 +320,150 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("texture/ab_hitbox/ab_collision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sinrj"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_4bcxw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("texture:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("texture:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("texture:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("texture/ab_hitbox/ab_collision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xmrs8"]
 _data = {
 &"RESET": SubResource("Animation_xk7p5"),
 &"attack": SubResource("Animation_4bcxw"),
+&"fall": SubResource("Animation_sinrj"),
 &"idle": SubResource("Animation_y2lmi"),
 &"jump": SubResource("Animation_l3d2q"),
 &"walk": SubResource("Animation_1c8hm")
 }
 
+[sub_resource type="Gradient" id="Gradient_1c8hm"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sinrj"]
+gradient = SubResource("Gradient_1c8hm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ks2ow"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_sinrj")
+
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(4, 4)
 script = ExtResource("1_y2lmi")
+ghost_node = ExtResource("2_1c8hm")
 
 [node name="texture" type="Sprite2D" parent="."]
-position = Vector2(-3, -8)
 texture = ExtResource("1_sor1j")
 hframes = 8
 region_rect = Rect2(0, 0, 16.0226, 16)
 
+[node name="ab_hitbox" type="Area2D" parent="texture"]
+collision_layer = 32
+collision_mask = 4
+
+[node name="ab_collision" type="CollisionShape2D" parent="texture/ab_hitbox"]
+position = Vector2(7.25, 1.25)
+shape = SubResource("RectangleShape2D_4bcxw")
+disabled = true
+
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7.5)
-shape = SubResource("RectangleShape2D_y2lmi")
+shape = SubResource("CircleShape2D_4bcxw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_xmrs8")
 }
 autoplay = "idle"
+
+[node name="ghost_timer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="dash_particles" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 8)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_ks2ow")
+
+[node name="dash_cd" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="body_entered" from="texture/ab_hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="ghost_timer" to="." method="_on_ghost_timer_timeout"]
+[connection signal="timeout" from="dash_cd" to="." method="_on_dash_cd_timeout"]
