@@ -255,15 +255,15 @@ states/vunerable/position = Vector2(701.333, 186.444)
 transitions = ["show_reveal", "mooving", SubResource("AnimationNodeStateMachineTransition_t535w"), "mooving", "missle_atack", SubResource("AnimationNodeStateMachineTransition_qr872"), "missle_atack", "mooving", SubResource("AnimationNodeStateMachineTransition_67ixx"), "missle_atack", "hide_bomb", SubResource("AnimationNodeStateMachineTransition_cecjl"), "hide_bomb", "vunerable", SubResource("AnimationNodeStateMachineTransition_tu04c"), "vunerable", "mooving", SubResource("AnimationNodeStateMachineTransition_443yr"), "Start", "enter_scene", SubResource("AnimationNodeStateMachineTransition_dcb1f"), "enter_scene", "show_reveal", SubResource("AnimationNodeStateMachineTransition_avurn")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aea53"]
-size = Vector2(28.25, 27.25)
+size = Vector2(34, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvxqt"]
 size = Vector2(154, 20)
 
 [node name="boss_preguiça" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(4, 4)
-collision_layer = 128
-collision_mask = 3
+collision_layer = 64
+collision_mask = 133
 script = ExtResource("1_bp8a1")
 
 [node name="collision" type="CollisionShape2D" parent="."]
@@ -299,23 +299,25 @@ parameters/conditions/time_missle = false
 [node name="bomb_cooldown" type="Timer" parent="."]
 
 [node name="missle_cooldown" type="Timer" parent="."]
+wait_time = 0.7
 
 [node name="wall_detector" type="RayCast2D" parent="."]
 position = Vector2(-1, -9)
-target_position = Vector2(-16, 0)
-collision_mask = 3
+scale = Vector2(1, 2)
+target_position = Vector2(-17.25, 0.25)
+collision_mask = 131
 
 [node name="hurtbox" type="Area2D" parent="." groups=["enemies"]]
-collision_layer = 4
+collision_layer = 2
+collision_mask = 4
 
 [node name="collision" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(-0.875, -13.875)
+position = Vector2(-1.25, -12.25)
 shape = SubResource("RectangleShape2D_aea53")
 disabled = true
 debug_color = Color(0.879494, 0.239606, 0.607208, 0.42)
 
 [node name="player_detector" type="Area2D" parent="."]
-collision_layer = 0
 
 [node name="collision" type="CollisionShape2D" parent="player_detector"]
 position = Vector2(0, -10)

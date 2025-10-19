@@ -11,7 +11,7 @@ radius = 13.0
 
 [node name="bomb" type="RigidBody2D"]
 collision_layer = 8
-collision_mask = 34
+collision_mask = 130
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_5ujpa")
@@ -26,7 +26,7 @@ texture = ExtResource("1_f31kw")
 
 [node name="colisior_detector" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 34
+collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="colisior_detector"]
 position = Vector2(0, 3)

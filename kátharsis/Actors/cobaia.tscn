@@ -6,7 +6,6 @@
 size = Vector2(16, 15)
 
 [node name="cobaia" type="CharacterBody2D" groups=["enemies"]]
-collision_layer = 4
 
 [node name="colission" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)

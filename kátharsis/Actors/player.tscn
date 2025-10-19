@@ -427,7 +427,7 @@ color_ramp = SubResource("GradientTexture1D_sinrj")
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(4, 4)
-collision_mask = 22
+collision_mask = 195
 script = ExtResource("1_y2lmi")
 ghost_node = ExtResource("2_1c8hm")
 
@@ -437,7 +437,8 @@ hframes = 8
 region_rect = Rect2(0, 0, 16.0226, 16)
 
 [node name="ab_hitbox" type="Area2D" parent="texture"]
-collision_mask = 84
+collision_layer = 4
+collision_mask = 66
 
 [node name="ab_collision" type="CollisionShape2D" parent="texture/ab_hitbox"]
 position = Vector2(7.25, 1.25)
@@ -446,8 +447,8 @@ disabled = true
 debug_color = Color(0.524742, 0.00322726, 0.877227, 0.42)
 
 [node name="hurtbox" type="Area2D" parent="texture"]
-collision_layer = 32
-collision_mask = 76
+collision_layer = 2
+collision_mask = 4
 
 [node name="hurt_collision" type="CollisionShape2D" parent="texture/hurtbox"]
 position = Vector2(0, 0.25)

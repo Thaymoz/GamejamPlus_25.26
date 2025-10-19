@@ -1,7 +1,7 @@
 extends AnimatableBody2D
 
 
-const SPEED := 700
+const SPEED := 1000
 var velocity := Vector2.ZERO
 var direction 
 

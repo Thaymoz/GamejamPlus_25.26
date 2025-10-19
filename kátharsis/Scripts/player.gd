@@ -81,7 +81,8 @@ func _physics_process(delta: float) -> void:
 #Attack
 	if Input.is_action_just_pressed("attack") and is_on_floor():
 		is_attacking = true
-		catarse_attack()
+		if is_catarse_mode:
+			catarse_attack()
 
 #Dash
 	if Input.is_action_just_pressed("dash"):
@@ -114,6 +115,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
+		print("player bateu:", body.name, "e ganhou tantos pontos de catarse", catarse)
 		if catarse < CATARSE_MAX and is_catarse_mode == false:
 			catarse += randi_range(2,7)
 			txt_catarse.text = str(min(catarse, CATARSE_MAX), "%")

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const BOMB = preload("res://Prefarbs/bomb.tscn")
 const MISSLE = preload("res://Prefarbs/missle.tscn")
-const SPEED = 40000.0
+var SPEED = 40000.0
 
 var direction = -1 
 
@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 			wall_detector.enabled = true
 			$hurtbox/collision.set_deferred("disabled",true)
 			set_collision_layer_value(7,true)
-			set_collision_layer_value(3,false)
+			set_collision_layer_value(2,false)
 			if direction == 1:
 				velocity.x =  SPEED * delta
 			else:
@@ -68,13 +68,15 @@ func _physics_process(delta: float) -> void:
 		"vunerable":
 			can_launch_missle = false
 			can_launch_bomb = false
+			SPEED = 0
 			await get_tree().create_timer(2.0).timeout
 			set_collision_layer_value(7,false)
-			set_collision_layer_value(3,true)
+			set_collision_layer_value(2,true)
 			player_hit = false
 			$hurtbox/collision.set_deferred("disabled",false)
 			await get_tree().create_timer(4).timeout
 			turn_count = 0
+			SPEED = 40000
 	if turn_count <= 2:
 		anim_tree.set("parameters/conditions/can_move", true)
 		anim_tree.set("parameters/conditions/time_missle", false)
@@ -132,10 +134,6 @@ func _on_player_detector_body_entered(_body):
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	print("vida do boss:", boss_life)
+	print(body.name)
 	player_hit = true
 	boss_life -= 5
-	if body.name == "catarse_shoot":
-		print("vida do boss:", boss_life)
-		player_hit = true
-		boss_life -= 5
