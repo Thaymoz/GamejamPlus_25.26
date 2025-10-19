@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c881hstf5vq36"]
+[gd_scene load_steps=21 format=3 uid="uid://c881hstf5vq36"]
 
 [ext_resource type="Texture2D" uid="uid://blycomvvkl60o" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Idle/Pri-Idle-SS.png" id="1_sor1j"]
 [ext_resource type="Script" uid="uid://c25hoy5iygade" path="res://Scripts/player.gd" id="1_y2lmi"]
@@ -10,6 +10,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bcxw"]
 size = Vector2(25.5, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1c8hm"]
+size = Vector2(13.75, 11)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bcxw"]
 radius = 7.375
@@ -424,6 +427,7 @@ color_ramp = SubResource("GradientTexture1D_sinrj")
 
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(4, 4)
+collision_mask = 22
 script = ExtResource("1_y2lmi")
 ghost_node = ExtResource("2_1c8hm")
 
@@ -433,13 +437,22 @@ hframes = 8
 region_rect = Rect2(0, 0, 16.0226, 16)
 
 [node name="ab_hitbox" type="Area2D" parent="texture"]
-collision_layer = 32
-collision_mask = 4
+collision_mask = 84
 
 [node name="ab_collision" type="CollisionShape2D" parent="texture/ab_hitbox"]
 position = Vector2(7.25, 1.25)
 shape = SubResource("RectangleShape2D_4bcxw")
 disabled = true
+debug_color = Color(0.524742, 0.00322726, 0.877227, 0.42)
+
+[node name="hurtbox" type="Area2D" parent="texture"]
+collision_layer = 32
+collision_mask = 76
+
+[node name="hurt_collision" type="CollisionShape2D" parent="texture/hurtbox"]
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_1c8hm")
+debug_color = Color(0.880568, 0.190352, 0.691112, 0.42)
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4bcxw")
@@ -461,7 +474,6 @@ amount = 20
 process_material = SubResource("ParticleProcessMaterial_ks2ow")
 
 [node name="dash_cd" type="Timer" parent="."]
-wait_time = 2.0
 
 [connection signal="body_entered" from="texture/ab_hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

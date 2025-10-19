@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const BOMB = preload("res://Prefarbs/bomb.tscn")
 const MISSLE = preload("res://Prefarbs/missle.tscn")
-const SPEED = 40000.0
+const SPEED = 30000.0
 
 var direction = -1 
 
@@ -25,7 +25,7 @@ var bomb_count := 0
 var can_launch_missle := true
 var can_launch_bomb := true
 var player_hit := false
-var boss_life := 1
+var boss_life := 100
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -39,6 +39,7 @@ func _physics_process(delta: float) -> void:
 
 	match state_machine.get_current_node():
 		"mooving":
+			wall_detector.enabled = true
 			$hurtbox/collision.set_deferred("disabled",true)
 			set_collision_layer_value(8,true)
 			set_collision_layer_value(3,false)
@@ -47,6 +48,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x =  -SPEED * delta
 		"missle_atack":
+			wall_detector.enabled = false
 			velocity.x = 0
 			await get_tree().create_timer(2.0).timeout
 			if can_launch_missle:
@@ -62,7 +64,7 @@ func _physics_process(delta: float) -> void:
 			can_launch_missle = false
 			can_launch_bomb = false
 			await get_tree().create_timer(2.0).timeout
-			set_collision_layer_value(8,false)
+			set_collision_layer_value(7,false)
 			set_collision_layer_value(3,true)
 			player_hit = false
 			$hurtbox/collision.set_deferred("disabled",false)
@@ -119,15 +121,10 @@ func _on_player_detector_body_entered(_body):
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
+	print(boss_life)
 	body.velocity = Vector2(50, -300)
 	player_hit = true
-	turn_count = 0 
+	#turn_count = 0 
 	boss_life -= 1
 	#if boss_life <= 0:
 		#Globals.boss_defeated.emit()
-
-
-func create_lose_boss():
-	var boss_scene = boss_instance.instantiate()
-	add_child(boss_scene)
-	boss_scene.global_position = position

@@ -74,7 +74,8 @@ texture = ExtResource("1_ebmjs")
 13:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_wrm1d"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_qxrlw")
 
 [node name="game" type="Node2D"]
@@ -88,10 +89,8 @@ layer_0/tile_data = PackedInt32Array(917504, 524288, 1, 917505, 524288, 1, 91750
 [node name="player" parent="." instance=ExtResource("2_qxrlw")]
 position = Vector2(486, 534)
 
-[node name="Camera2D" type="Camera2D" parent="player"]
-
 [node name="cobaia" parent="." instance=ExtResource("3_wrm1d")]
-position = Vector2(1012, 825)
+position = Vector2(991, 850)
 scale = Vector2(4, 4)
 
 [node name="boss_preguiça" parent="." instance=ExtResource("4_3dryh")]

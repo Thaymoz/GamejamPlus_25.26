@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b7nlta0pfn5pe"]
+[gd_scene load_steps=31 format=3 uid="uid://b7nlta0pfn5pe"]
 
 [ext_resource type="Script" uid="uid://dt6ljgjcnh0se" path="res://Scripts/boss_preguica.gd" id="1_bp8a1"]
 [ext_resource type="Texture2D" uid="uid://c62pkpu7imtmq" path="res://Assets/Sprite Pack 2/8 - Comrade Cheese Puff/Tank_Movement (32 x 32) (1).png" id="2_g7smv"]
@@ -28,18 +28,6 @@ tracks/1/path = NodePath("collision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("explosion_tank:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -86,18 +74,6 @@ tracks/2/keys = {
 "args": [],
 "method": &"create_lose_boss"
 }]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("explosion_tank:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_wsgah"]
@@ -284,34 +260,6 @@ size = Vector2(18, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvxqt"]
 size = Vector2(154, 20)
 
-[sub_resource type="Gradient" id="Gradient_h20g0"]
-offsets = PackedFloat32Array(0, 0.711409, 1)
-colors = PackedColorArray(0.92549, 0.92549, 0.2, 1, 0.815686, 0.294118, 0.243137, 1, 0.921569, 0.470588, 0.298039, 0.356863)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ojkxb"]
-gradient = SubResource("Gradient_h20g0")
-
-[sub_resource type="Curve" id="Curve_gabqn"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.502976, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_jag7r"]
-curve = SubResource("Curve_gabqn")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ftprm"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 10.0
-direction = Vector3(0, 0, 0)
-spread = 180.0
-initial_velocity_min = 50.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-scale_min = 1.5
-scale_max = 2.5
-scale_curve = SubResource("CurveTexture_jag7r")
-color_ramp = SubResource("GradientTexture1D_ojkxb")
-
 [node name="boss_preguiça" type="CharacterBody2D"]
 scale = Vector2(4, 4)
 collision_layer = 128
@@ -373,14 +321,6 @@ debug_color = Color(0.879494, 0.239606, 0.607208, 0.42)
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_cvxqt")
 debug_color = Color(0.623015, 0.528705, 0.192666, 0.42)
-
-[node name="explosion_tank" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 48
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_ftprm")
 
 [connection signal="timeout" from="bomb_cooldown" to="." method="_on_bomb_cooldown_timeout"]
 [connection signal="timeout" from="missle_cooldown" to="." method="_on_missle_cooldown_timeout"]

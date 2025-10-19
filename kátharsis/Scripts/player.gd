@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 500.0
+var SPEED = 500.0
 const AIR_FRICTION := 0.65
 const DASH_DISTANCE = 300
 
@@ -12,6 +12,7 @@ const DASH_DISTANCE = 300
 @onready var ghost_timer: Timer = $ghost_timer
 @onready var dash_particles: GPUParticles2D = $dash_particles
 @onready var dash_cd: Timer = $dash_cd
+@onready var hurt_collision: CollisionShape2D = $texture/hurtbox/hurt_collision
 
 #Variaveis do pulo
 @export var jump_height := 128
@@ -110,14 +111,13 @@ func dash():
 	dash_cd.start()
 	ghost_timer.start()
 	dash_particles.emitting = true
-	var dash_direction = texture.scale.x
-	var target_position = position + Vector2(dash_direction * DASH_DISTANCE, 0)
-	var tween = get_tree().create_tween()
-	#tween.tween_property(self, "position", position + velocity * 1.5, 0.2)
-	tween.tween_property(self, "position", target_position, 0.3)
-	await tween.finished
+	hurt_collision.disabled = true
+	SPEED = SPEED*5
+	await get_tree().create_timer(0.1).timeout
+	SPEED = 500
 	ghost_timer.stop()
 	dash_particles.emitting = false
 
 func _on_dash_cd_timeout() -> void:
+	hurt_collision.disabled = false
 	can_dash = true
