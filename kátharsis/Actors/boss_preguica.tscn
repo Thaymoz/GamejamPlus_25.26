@@ -255,12 +255,12 @@ states/vunerable/position = Vector2(701.333, 186.444)
 transitions = ["show_reveal", "mooving", SubResource("AnimationNodeStateMachineTransition_t535w"), "mooving", "missle_atack", SubResource("AnimationNodeStateMachineTransition_qr872"), "missle_atack", "mooving", SubResource("AnimationNodeStateMachineTransition_67ixx"), "missle_atack", "hide_bomb", SubResource("AnimationNodeStateMachineTransition_cecjl"), "hide_bomb", "vunerable", SubResource("AnimationNodeStateMachineTransition_tu04c"), "vunerable", "mooving", SubResource("AnimationNodeStateMachineTransition_443yr"), "Start", "enter_scene", SubResource("AnimationNodeStateMachineTransition_dcb1f"), "enter_scene", "show_reveal", SubResource("AnimationNodeStateMachineTransition_avurn")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aea53"]
-size = Vector2(18, 4)
+size = Vector2(18, 10.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvxqt"]
 size = Vector2(154, 20)
 
-[node name="boss_preguiça" type="CharacterBody2D"]
+[node name="boss_preguiça" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(4, 4)
 collision_layer = 128
 collision_mask = 3
@@ -299,23 +299,23 @@ parameters/conditions/time_missle = false
 [node name="bomb_cooldown" type="Timer" parent="."]
 
 [node name="missle_cooldown" type="Timer" parent="."]
-wait_time = 2.5
 
 [node name="wall_detector" type="RayCast2D" parent="."]
 position = Vector2(-1, -9)
 target_position = Vector2(-16, 0)
 collision_mask = 3
 
-[node name="hurtbox" type="Area2D" parent="."]
+[node name="hurtbox" type="Area2D" parent="." groups=["enemies"]]
 collision_layer = 4
 
 [node name="collision" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(-1, -19)
+position = Vector2(-1, -22.25)
 shape = SubResource("RectangleShape2D_aea53")
 disabled = true
 debug_color = Color(0.879494, 0.239606, 0.607208, 0.42)
 
 [node name="player_detector" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="collision" type="CollisionShape2D" parent="player_detector"]
 position = Vector2(0, -10)
@@ -324,5 +324,6 @@ debug_color = Color(0.623015, 0.528705, 0.192666, 0.42)
 
 [connection signal="timeout" from="bomb_cooldown" to="." method="_on_bomb_cooldown_timeout"]
 [connection signal="timeout" from="missle_cooldown" to="." method="_on_missle_cooldown_timeout"]
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]

@@ -90,8 +90,34 @@ layer_0/tile_data = PackedInt32Array(917504, 524288, 1, 917505, 524288, 1, 91750
 position = Vector2(486, 534)
 
 [node name="cobaia" parent="." instance=ExtResource("3_wrm1d")]
-position = Vector2(991, 850)
+position = Vector2(98, 861)
 scale = Vector2(4, 4)
 
 [node name="boss_preguiça" parent="." instance=ExtResource("4_3dryh")]
-position = Vector2(1206, 896)
+position = Vector2(1854, 896)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2

@@ -14,8 +14,8 @@ size = Vector2(25.5, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1c8hm"]
 size = Vector2(13.75, 11)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4bcxw"]
-radius = 7.375
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sinrj"]
+size = Vector2(13, 15)
 
 [sub_resource type="Animation" id="Animation_xk7p5"]
 length = 0.001
@@ -425,7 +425,7 @@ scale_min = 4.0
 scale_max = 4.0
 color_ramp = SubResource("GradientTexture1D_sinrj")
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(4, 4)
 collision_mask = 22
 script = ExtResource("1_y2lmi")
@@ -455,7 +455,8 @@ shape = SubResource("RectangleShape2D_1c8hm")
 debug_color = Color(0.880568, 0.190352, 0.691112, 0.42)
 
 [node name="collision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_4bcxw")
+position = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_sinrj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

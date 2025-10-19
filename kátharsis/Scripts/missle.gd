@@ -1,6 +1,6 @@
 extends AnimatableBody2D
 
-const SPEED := 500
+const SPEED := 700
 const EXPLOSION = preload("res://Prefarbs/explosion.tscn")
 var velocity := Vector2.ZERO
 var direction 

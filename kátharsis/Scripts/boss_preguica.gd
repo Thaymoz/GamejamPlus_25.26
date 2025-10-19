@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const BOMB = preload("res://Prefarbs/bomb.tscn")
 const MISSLE = preload("res://Prefarbs/missle.tscn")
-const SPEED = 30000.0
+const SPEED = 40000.0
 
 var direction = -1 
 
@@ -31,11 +31,16 @@ func _ready() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta: float) -> void:
-	if wall_detector.is_colliding():
+	var collision = wall_detector.get_collider()
+	if wall_detector.is_colliding() and not collision.is_in_group("player"):
 		direction *= -1
 		wall_detector.scale.x *= -1
 		sprite.scale.x *= -1
 		turn_count += 1
+	elif wall_detector.is_colliding() and  collision.is_in_group("player"):
+		direction *= -1
+		wall_detector.scale.x *= -1
+		sprite.scale.x *= -1
 
 	match state_machine.get_current_node():
 		"mooving":
@@ -90,16 +95,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func throw_bomb():
-	if bomb_count <= 3:
-		var bomb_instance = BOMB.instantiate()
-		add_sibling(bomb_instance)
-		bomb_instance.global_position = bomb_point.global_position
-		bomb_instance.apply_impulse(Vector2(randi_range(direction*400,direction*800),randi_range(-400, -800)))
+	if bomb_count <= 5:
+		spawn_mutiples_objects(BOMB,bomb_point,3)
 		$bomb_cooldown.start()
 		bomb_count += 1
 
 func launch_missle():
-	if missle_count <= 4:
+	if missle_count <= 7:
 		var missle_instance = MISSLE.instantiate()
 		add_sibling(missle_instance)
 		missle_instance.global_position = missel_point.global_position
@@ -115,6 +117,13 @@ func _on_bomb_cooldown_timeout() -> void:
 func _on_missle_cooldown_timeout() -> void:
 	can_launch_missle = true 
 
+func spawn_mutiples_objects(object_to_spawn : PackedScene, spawn_point : Marker2D, count : int):
+	for i in range(count):
+		var object_instance = object_to_spawn.instantiate()
+		add_sibling(object_instance)
+		object_instance.global_position = spawn_point.global_position
+		object_instance.apply_impulse(Vector2(randi_range(direction*400,direction*800),randi_range(-400, -800)))
+
 
 func _on_player_detector_body_entered(_body):
 	set_physics_process(true)
@@ -126,5 +135,3 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 	player_hit = true
 	#turn_count = 0 
 	boss_life -= 1
-	#if boss_life <= 0:
-		#Globals.boss_defeated.emit()
