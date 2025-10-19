@@ -1,6 +1,6 @@
 extends AnimatableBody2D
 
-const SPEED := 200
+const SPEED := 500
 const EXPLOSION = preload("res://Prefarbs/explosion.tscn")
 var velocity := Vector2.ZERO
 var direction 
@@ -11,7 +11,6 @@ var direction
 
 func _process(delta: float) -> void:
 	velocity.x = SPEED * direction * delta
-	
 	move_and_collide(velocity)
 
 

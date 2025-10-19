@@ -1,24 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dspq4yg5vnvx4"]
+[gd_scene load_steps=14 format=3 uid="uid://dspq4yg5vnvx4"]
 
 [ext_resource type="Texture2D" uid="uid://c62pkpu7imtmq" path="res://Assets/Sprite Pack 2/8 - Comrade Cheese Puff/Tank_Movement (32 x 32) (1).png" id="1_240a8"]
 [ext_resource type="Script" uid="uid://dvnqpg0ordoc1" path="res://Scripts/preguiça.gd" id="1_gc4t0"]
-
-[sub_resource type="Animation" id="Animation_66j5m"]
-resource_name = "moving"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
 
 [sub_resource type="Animation" id="Animation_udrbi"]
 length = 0.001
@@ -35,17 +18,124 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_gc4t0"]
+resource_name = "enter_scene"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.101977, 0.220055, 0.313087, 0.416853, 0.511673, 0.615439, 0.715627, 0.833333, 0.907057),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 7, 8, 7, 8, 7, 8, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_u4dwg"]
+resource_name = "hide_bomb"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.101977, 0.216477, 0.313087, 0.418642),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sqml6"]
+resource_name = "missle_atack"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_66j5m"]
+resource_name = "moving"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_s6sce"]
+resource_name = "show_reveal"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(7, 0), Vector2i(6, 0), Vector2i(5, 0), Vector2i(4, 0), Vector2i(3, 0), Vector2i(2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kp40s"]
+resource_name = "vunerable"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u4dwg"]
 _data = {
 &"RESET": SubResource("Animation_udrbi"),
-&"moving": SubResource("Animation_66j5m")
+&"enter_scene": SubResource("Animation_gc4t0"),
+&"hide_bomb": SubResource("Animation_u4dwg"),
+&"missle_atack": SubResource("Animation_sqml6"),
+&"moving": SubResource("Animation_66j5m"),
+&"show_reveal": SubResource("Animation_s6sce"),
+&"vunerable": SubResource("Animation_kp40s")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_240a8"]
 size = Vector2(27, 17)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gc4t0"]
+size = Vector2(11, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66j5m"]
+size = Vector2(100, 20)
+
 [node name="preguiça" type="CharacterBody2D"]
-collision_layer = 4
+collision_layer = 5
 collision_mask = 3
 script = ExtResource("1_gc4t0")
 
@@ -67,12 +157,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_u4dwg")
 }
 
-[node name="anim_tree" type="AnimationTree" parent="."]
-
 [node name="bomb_cd" type="Timer" parent="."]
-autostart = true
 
 [node name="missle_cd" type="Timer" parent="."]
+wait_time = 2.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -8.5)
@@ -82,4 +170,25 @@ shape = SubResource("RectangleShape2D_240a8")
 position = Vector2(-1, -10)
 target_position = Vector2(-16, 0)
 
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="hurt_collision" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(-1.5, -21)
+shape = SubResource("RectangleShape2D_gc4t0")
+disabled = true
+debug_color = Color(0.972219, 0, 0.442572, 0.42)
+
+[node name="player_detector" type="Area2D" parent="."]
+
+[node name="PDetector_collision" type="CollisionShape2D" parent="player_detector"]
+position = Vector2(-1, -10)
+shape = SubResource("RectangleShape2D_66j5m")
+debug_color = Color(0, 0.643031, 0.307382, 0.42)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-1, -10)
+
 [connection signal="timeout" from="bomb_cd" to="." method="_on_bomb_cd_timeout"]
+[connection signal="timeout" from="missle_cd" to="." method="_on_missle_cd_timeout"]
+[connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]

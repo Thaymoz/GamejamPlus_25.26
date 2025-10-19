@@ -4,7 +4,7 @@ const EXPLOSION = preload("res://Prefarbs/explosion.tscn")
 @onready var collision: CollisionShape2D = $collision
 
 
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
 	visible = false
 	var explosion_instance = EXPLOSION.instantiate()
 	get_parent().add_child(explosion_instance)
