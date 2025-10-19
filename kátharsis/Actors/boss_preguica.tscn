@@ -255,7 +255,7 @@ states/vunerable/position = Vector2(701.333, 186.444)
 transitions = ["show_reveal", "mooving", SubResource("AnimationNodeStateMachineTransition_t535w"), "mooving", "missle_atack", SubResource("AnimationNodeStateMachineTransition_qr872"), "missle_atack", "mooving", SubResource("AnimationNodeStateMachineTransition_67ixx"), "missle_atack", "hide_bomb", SubResource("AnimationNodeStateMachineTransition_cecjl"), "hide_bomb", "vunerable", SubResource("AnimationNodeStateMachineTransition_tu04c"), "vunerable", "mooving", SubResource("AnimationNodeStateMachineTransition_443yr"), "Start", "enter_scene", SubResource("AnimationNodeStateMachineTransition_dcb1f"), "enter_scene", "show_reveal", SubResource("AnimationNodeStateMachineTransition_avurn")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aea53"]
-size = Vector2(18, 10.5)
+size = Vector2(28.25, 27.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvxqt"]
 size = Vector2(154, 20)
@@ -309,7 +309,7 @@ collision_mask = 3
 collision_layer = 4
 
 [node name="collision" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(-1, -22.25)
+position = Vector2(-0.875, -13.875)
 shape = SubResource("RectangleShape2D_aea53")
 disabled = true
 debug_color = Color(0.879494, 0.239606, 0.607208, 0.42)

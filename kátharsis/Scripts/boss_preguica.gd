@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		"mooving":
 			wall_detector.enabled = true
 			$hurtbox/collision.set_deferred("disabled",true)
-			set_collision_layer_value(8,true)
+			set_collision_layer_value(7,true)
 			set_collision_layer_value(3,false)
 			if direction == 1:
 				velocity.x =  SPEED * delta
@@ -73,6 +73,8 @@ func _physics_process(delta: float) -> void:
 			set_collision_layer_value(3,true)
 			player_hit = false
 			$hurtbox/collision.set_deferred("disabled",false)
+			await get_tree().create_timer(4).timeout
+			turn_count = 0
 	if turn_count <= 2:
 		anim_tree.set("parameters/conditions/can_move", true)
 		anim_tree.set("parameters/conditions/time_missle", false)
@@ -130,8 +132,10 @@ func _on_player_detector_body_entered(_body):
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	print(boss_life)
-	body.velocity = Vector2(50, -300)
+	print("vida do boss:", boss_life)
 	player_hit = true
-	#turn_count = 0 
-	boss_life -= 1
+	boss_life -= 5
+	if body.name == "catarse_shoot":
+		print("vida do boss:", boss_life)
+		player_hit = true
+		boss_life -= 5

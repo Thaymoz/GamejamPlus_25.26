@@ -3,7 +3,7 @@ extends CharacterBody2D
 var SPEED = 500.0
 const AIR_FRICTION := 0.65
 const DASH_DISTANCE = 300
-
+const CATARSE_SHOOT = preload("res://Prefarbs/catarse_shoot.tscn")
 #referencia de nos
 @onready var player: CharacterBody2D = $"."
 @onready var texture: Sprite2D = $texture
@@ -13,6 +13,10 @@ const DASH_DISTANCE = 300
 @onready var dash_particles: GPUParticles2D = $dash_particles
 @onready var dash_cd: Timer = $dash_cd
 @onready var hurt_collision: CollisionShape2D = $texture/hurtbox/hurt_collision
+@onready var txt_catarse: Label = %txt_catarse
+@onready var catarse_drain: Timer = $catarse_drain
+@onready var point_shoot: Marker2D = %point_shoot
+
 
 #Variaveis do pulo
 @export var jump_height := 128
@@ -28,14 +32,25 @@ var direction
 var is_attacking : bool = false
 var can_dash : bool = true
 
+#catarse
+var catarse : int = 100
+const CATARSE_MAX := 100
+var is_catarse_mode : bool = false
+var direction2 : float = -1
+
+
 func _ready() -> void:
 	jump_velocity = (jump_height * 2) / max_time_to_peak
 	gravity = (jump_height * 2) / pow(max_time_to_peak, 2)
 	fall_gravity = gravity * 2
 
 
+
 func _process(_delta: float) -> void:
 	handle_animation()
+	if Input.is_action_just_pressed("catarse_mode") and catarse >= 100:
+		is_catarse_mode = true
+		catarse_drain.start()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -59,12 +74,14 @@ func _physics_process(delta: float) -> void:
 		is_attacking = false
 		velocity.x = lerp(velocity.x, direction * SPEED, AIR_FRICTION)
 		texture.scale.x = direction 
+		direction2 = direction2 * direction
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 #Attack
-	if Input.is_action_pressed("attack") and is_on_floor():
+	if Input.is_action_just_pressed("attack") and is_on_floor():
 		is_attacking = true
+		catarse_attack()
 
 #Dash
 	if Input.is_action_just_pressed("dash"):
@@ -92,11 +109,15 @@ func handle_animation():
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack":
 		is_attacking = false
+		
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
-		print(body.name)
+		if catarse < CATARSE_MAX and is_catarse_mode == false:
+			catarse += randi_range(2,7)
+			txt_catarse.text = str(min(catarse, CATARSE_MAX), "%")
+			print("player bateu:", body.name, "e ganhou tantos pontos de catarse", catarse)
 
 func add_ghost():
 	var ghost = ghost_node.instantiate()
@@ -112,12 +133,30 @@ func dash():
 	ghost_timer.start()
 	dash_particles.emitting = true
 	hurt_collision.disabled = true
-	SPEED = SPEED*5
-	await get_tree().create_timer(0.1).timeout
+	SPEED = SPEED*3.5
+	await get_tree().create_timer(0.3).timeout
+	hurt_collision.disabled = false
 	SPEED = 500
 	ghost_timer.stop()
 	dash_particles.emitting = false
 
 func _on_dash_cd_timeout() -> void:
-	hurt_collision.disabled = false
+	
 	can_dash = true
+
+
+func _on_catarse_drain_timeout() -> void:
+	if catarse > 0:
+		catarse -= 1
+		txt_catarse.text = str(catarse)
+		if catarse == 0:
+			is_catarse_mode = false
+			catarse_drain.stop()
+
+func catarse_attack():
+	if is_catarse_mode and is_attacking:
+		var shoot_catarse_instance = CATARSE_SHOOT.instantiate()
+		add_sibling(shoot_catarse_instance)
+		shoot_catarse_instance.global_position = point_shoot.global_position
+		shoot_catarse_instance.set_direction(texture.scale.x)
+		

@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://eearcic4cxb1"]
+
+[ext_resource type="Script" uid="uid://4pjd4ub1dw6i" path="res://Scripts/catarse_shoot.gd" id="1_c2c4k"]
+[ext_resource type="Texture2D" uid="uid://bpmo0s3yfjydh" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri-TailAttack/Pri-TailAttack-SS.png" id="1_t0isv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c2c4k"]
+
+[sub_resource type="Animation" id="Animation_ju6mv"]
+resource_name = "idle"
+length = 0.3
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.22355, 4.56927, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.07, 0.1, 0.13, 0.16, 0.19, 0.23, 0.27, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.815686, 0.0509804, 0.129412, 1), Color(0.933333, 0.372549, 0.105882, 1), Color(0.933333, 0.8, 0.105882, 1), Color(0.152941, 0.8, 0.105882, 1), Color(0.152941, 0.8, 0.898039, 1), Color(0.152941, 0.156863, 0.898039, 1), Color(0.513726, 0.0666667, 0.960784, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0.027451)]
+}
+
+[sub_resource type="Animation" id="Animation_46nnq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_el2l4"]
+_data = {
+&"RESET": SubResource("Animation_46nnq"),
+&"idle": SubResource("Animation_ju6mv")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t0isv"]
+radius = 11.0
+
+[node name="catarse_shoot" type="AnimatableBody2D"]
+scale = Vector2(3, 1.5)
+collision_layer = 8
+collision_mask = 2
+sync_to_physics = false
+script = ExtResource("1_c2c4k")
+
+[node name="colision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c2c4k")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_t0isv")
+offset = Vector2(0, -8)
+region_enabled = true
+region_rect = Rect2(128.342, 14.8632, 25.6545, 17.1368)
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_el2l4")
+}
+autoplay = "idle"
+
+[node name="collisior_detector" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="detector_closior" type="CollisionShape2D" parent="collisior_detector"]
+shape = SubResource("CircleShape2D_t0isv")
+debug_color = Color(0.614375, 0.451416, 0.763677, 0.42)
+
+[connection signal="body_entered" from="collisior_detector" to="." method="_on_collisior_detector_body_entered"]
