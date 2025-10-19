@@ -303,8 +303,8 @@ wait_time = 0.7
 
 [node name="wall_detector" type="RayCast2D" parent="."]
 position = Vector2(-1, -9)
-scale = Vector2(1, 2)
-target_position = Vector2(-17.25, 0.25)
+scale = Vector2(1, 2.5)
+target_position = Vector2(-15.25, 0.25)
 collision_mask = 131
 
 [node name="hurtbox" type="Area2D" parent="." groups=["enemies"]]
@@ -318,6 +318,7 @@ disabled = true
 debug_color = Color(0.879494, 0.239606, 0.607208, 0.42)
 
 [node name="player_detector" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="collision" type="CollisionShape2D" parent="player_detector"]
 position = Vector2(0, -10)

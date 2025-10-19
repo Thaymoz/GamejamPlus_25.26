@@ -38,6 +38,10 @@ const CATARSE_MAX := 100
 var is_catarse_mode : bool = false
 var direction2 : float = -1
 
+#tomar dano
+var knockback_vector := Vector2.ZERO
+var is_hurted : bool = false
+var knockback_power := 20 
 
 func _ready() -> void:
 	jump_velocity = (jump_height * 2) / max_time_to_peak
@@ -89,6 +93,9 @@ func _physics_process(delta: float) -> void:
 		if can_dash:
 			dash()
 
+#dano
+	if knockback_vector != Vector2.ZERO:
+		velocity = knockback_vector
 	move_and_slide()
 
 
@@ -100,6 +107,8 @@ func handle_animation():
 		anim = "fall"
 	if is_attacking:
 		anim = "attack"
+	if is_hurted:
+		anim = "hurt"
 	if direction and is_on_floor():
 		anim = "walk"
 
@@ -162,3 +171,23 @@ func catarse_attack():
 		shoot_catarse_instance.global_position = point_shoot.global_position
 		shoot_catarse_instance.set_direction(texture.scale.x)
 		
+
+func take_damage(knockback_force := Vector2.ZERO,duration := 0.25):#aula 10
+	if Globals.player_life > 0:
+		Globals.player_life -= 1
+	else:
+		queue_free()
+	if knockback_force != Vector2.ZERO:
+		knockback_vector = knockback_force
+		var knockback_tween := get_tree().create_tween()
+		knockback_tween.parallel().tween_property(self, "knockback_vector", Vector2.ZERO, duration)
+		texture.modulate = Color(1,0,0,1)
+		knockback_tween.parallel().tween_property(texture,"modulate",Color(1,1,1,1),duration)
+	is_hurted = true
+	await get_tree().create_timer(.3).timeout
+	is_hurted = false
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	print("tocou")
+	var knockback = Vector2((global_position.x - body.global_position.x)*knockback_power, -200)
+	take_damage(knockback)

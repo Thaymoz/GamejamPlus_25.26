@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c881hstf5vq36"]
+[gd_scene load_steps=23 format=3 uid="uid://c881hstf5vq36"]
 
 [ext_resource type="Texture2D" uid="uid://blycomvvkl60o" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Idle/Pri-Idle-SS.png" id="1_sor1j"]
 [ext_resource type="Script" uid="uid://c25hoy5iygade" path="res://Scripts/player.gd" id="1_y2lmi"]
@@ -7,15 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://b4nr0dpi2viwy" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Walk/Pri-Walk-SS.png" id="4_xmrs8"]
 [ext_resource type="Texture2D" uid="uid://c0cuqwcsts6v3" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Attack_ref/spritesheet (1).png" id="5_l3d2q"]
 [ext_resource type="Texture2D" uid="uid://ba4vp6fpy3jgn" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Fall/Pri-fall.png" id="6_4bcxw"]
+[ext_resource type="Texture2D" uid="uid://y5kw7p6pvul7" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Hurt/Pri-Dano-SS.png" id="8_sinrj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bcxw"]
 size = Vector2(25.5, 7)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1c8hm"]
-size = Vector2(13.75, 11)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks2ow"]
+size = Vector2(14.25, 13.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sinrj"]
-size = Vector2(13, 15)
+size = Vector2(11.5, 12)
 
 [sub_resource type="Animation" id="Animation_xk7p5"]
 length = 0.001
@@ -399,11 +400,75 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_ks2ow"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_sinrj")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("texture:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("texture:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("texture:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("texture/ab_hitbox/ab_collision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xmrs8"]
 _data = {
 &"RESET": SubResource("Animation_xk7p5"),
 &"attack": SubResource("Animation_4bcxw"),
 &"fall": SubResource("Animation_sinrj"),
+&"hurt": SubResource("Animation_ks2ow"),
 &"idle": SubResource("Animation_y2lmi"),
 &"jump": SubResource("Animation_l3d2q"),
 &"walk": SubResource("Animation_1c8hm")
@@ -427,7 +492,7 @@ color_ramp = SubResource("GradientTexture1D_sinrj")
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(4, 4)
-collision_mask = 195
+collision_mask = 201
 script = ExtResource("1_y2lmi")
 ghost_node = ExtResource("2_1c8hm")
 
@@ -448,18 +513,18 @@ debug_color = Color(0.524742, 0.00322726, 0.877227, 0.42)
 
 [node name="hurtbox" type="Area2D" parent="texture"]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 72
 
 [node name="hurt_collision" type="CollisionShape2D" parent="texture/hurtbox"]
-position = Vector2(0, 0.25)
-shape = SubResource("RectangleShape2D_1c8hm")
+position = Vector2(1.125, 1.75)
+shape = SubResource("RectangleShape2D_ks2ow")
 debug_color = Color(0.880568, 0.190352, 0.691112, 0.42)
 
 [node name="point_shoot" type="Marker2D" parent="texture"]
 unique_name_in_owner = true
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(0.75, 0.75)
+position = Vector2(1.25, 2)
 shape = SubResource("RectangleShape2D_sinrj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -484,6 +549,7 @@ process_material = SubResource("ParticleProcessMaterial_ks2ow")
 wait_time = 0.1
 
 [connection signal="body_entered" from="texture/ab_hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="texture/hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="ghost_timer" to="." method="_on_ghost_timer_timeout"]
 [connection signal="timeout" from="dash_cd" to="." method="_on_dash_cd_timeout"]

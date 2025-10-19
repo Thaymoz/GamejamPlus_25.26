@@ -77,13 +77,13 @@ func _physics_process(delta: float) -> void:
 			await get_tree().create_timer(4).timeout
 			turn_count = 0
 			SPEED = 40000
-	if turn_count <= 2:
+	if turn_count <= 3:
 		anim_tree.set("parameters/conditions/can_move", true)
 		anim_tree.set("parameters/conditions/time_missle", false)
-	elif missle_count >= 4:
+	elif missle_count >= 7:
 		anim_tree.set("parameters/conditions/time_bomb", true)
 		missle_count = 0
-	elif bomb_count >= 3:
+	elif bomb_count >= 5:
 		anim_tree.set("parameters/conditions/is_vunerable", true)
 		bomb_count = 0
 	else:
@@ -135,5 +135,6 @@ func _on_player_detector_body_entered(_body):
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	print(body.name)
+	print(boss_life)
 	player_hit = true
 	boss_life -= 5

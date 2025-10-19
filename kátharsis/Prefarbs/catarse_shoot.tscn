@@ -69,7 +69,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t0isv"]
-radius = 11.0202
+radius = 10.3333
 
 [node name="catarse_shoot" type="AnimatableBody2D"]
 scale = Vector2(3, 1.5)
@@ -95,7 +95,7 @@ autoplay = "idle"
 
 [node name="collisior_detector" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 130
+collision_mask = 194
 
 [node name="detector_closior" type="CollisionShape2D" parent="collisior_detector"]
 shape = SubResource("CircleShape2D_t0isv")

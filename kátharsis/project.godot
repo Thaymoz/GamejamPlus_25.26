@@ -84,12 +84,11 @@ catarse_mode={
 [layer_names]
 
 2d_physics/layer_1="Player"
-2d_physics/layer_2="Word"
-2d_physics/layer_3="Enemies"
-2d_physics/layer_4="Item"
-2d_physics/layer_5="Hitbox"
-2d_physics/layer_6="Hurtbox"
+2d_physics/layer_2="hurtbox"
+2d_physics/layer_3="player attack"
+2d_physics/layer_4="enemies atack"
 2d_physics/layer_7="Boss"
+2d_physics/layer_8="word"
 
 [rendering]
 
