@@ -33,7 +33,7 @@ var is_attacking : bool = false
 var can_dash : bool = true
 
 #catarse
-var catarse : int = 100
+var catarse : int = 0
 const CATARSE_MAX := 100
 var is_catarse_mode : bool = false
 var direction2 : float = -1

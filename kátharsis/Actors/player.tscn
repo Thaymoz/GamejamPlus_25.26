@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://y5kw7p6pvul7" path="res://Assets/Assets Gamelab/Characters/Prisma/Pri_Hurt/Pri-Dano-SS.png" id="8_sinrj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bcxw"]
-size = Vector2(25.5, 7)
+size = Vector2(30.25, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks2ow"]
 size = Vector2(14.25, 13.5)
@@ -506,7 +506,7 @@ collision_layer = 4
 collision_mask = 66
 
 [node name="ab_collision" type="CollisionShape2D" parent="texture/ab_hitbox"]
-position = Vector2(7.25, 1.25)
+position = Vector2(9.625, 1.25)
 shape = SubResource("RectangleShape2D_4bcxw")
 disabled = true
 debug_color = Color(0.524742, 0.00322726, 0.877227, 0.42)
@@ -534,7 +534,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="ghost_timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.07
 
 [node name="dash_particles" type="GPUParticles2D" parent="."]
 show_behind_parent = true

@@ -61,20 +61,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"create_lose_boss"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_wsgah"]
 resource_name = "enter_scene"
@@ -258,7 +244,7 @@ transitions = ["show_reveal", "mooving", SubResource("AnimationNodeStateMachineT
 size = Vector2(34, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvxqt"]
-size = Vector2(154, 20)
+size = Vector2(225.25, 20)
 
 [node name="boss_preguiça" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(4, 4)
@@ -299,7 +285,7 @@ parameters/conditions/time_missle = false
 [node name="bomb_cooldown" type="Timer" parent="."]
 
 [node name="missle_cooldown" type="Timer" parent="."]
-wait_time = 0.7
+wait_time = 0.65
 
 [node name="wall_detector" type="RayCast2D" parent="."]
 position = Vector2(-1, -9)
@@ -321,7 +307,7 @@ debug_color = Color(0.879494, 0.239606, 0.607208, 0.42)
 collision_layer = 0
 
 [node name="collision" type="CollisionShape2D" parent="player_detector"]
-position = Vector2(0, -10)
+position = Vector2(-35.625, -10)
 shape = SubResource("RectangleShape2D_cvxqt")
 debug_color = Color(0.623015, 0.528705, 0.192666, 0.42)
 

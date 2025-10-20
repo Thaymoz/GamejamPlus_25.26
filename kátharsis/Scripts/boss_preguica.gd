@@ -25,7 +25,6 @@ var bomb_count := 0
 var can_launch_missle := true
 var can_launch_bomb := true
 var player_hit := false
-var boss_life := 100
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -74,7 +73,7 @@ func _physics_process(delta: float) -> void:
 			set_collision_layer_value(2,true)
 			player_hit = false
 			$hurtbox/collision.set_deferred("disabled",false)
-			await get_tree().create_timer(4).timeout
+			await get_tree().create_timer(6).timeout
 			turn_count = 0
 			SPEED = 40000
 	if turn_count <= 3:
@@ -92,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		anim_tree.set("parameters/conditions/time_bomb", false)
 		anim_tree.set("parameters/conditions/time_missle", true)
 
-	if boss_life <=0:
+	if Globals.boss_life <=0:
 		state_machine.travel("death")
 		$hurtbox/collision.set_deferred("disabled",true)
 
@@ -100,7 +99,7 @@ func _physics_process(delta: float) -> void:
 
 func throw_bomb():
 	if bomb_count <= 5:
-		spawn_mutiples_objects(BOMB,bomb_point,3)
+		spawn_mutiples_objects(BOMB,bomb_point,4)
 		$bomb_cooldown.start()
 		bomb_count += 1
 
@@ -126,7 +125,7 @@ func spawn_mutiples_objects(object_to_spawn : PackedScene, spawn_point : Marker2
 		var object_instance = object_to_spawn.instantiate()
 		add_sibling(object_instance)
 		object_instance.global_position = spawn_point.global_position
-		object_instance.apply_impulse(Vector2(randi_range(direction*400,direction*800),randi_range(-400, -800)))
+		object_instance.apply_impulse(Vector2(randi_range(direction*400,direction*1200),randi_range(-400, -800)))
 
 
 func _on_player_detector_body_entered(_body):
@@ -134,7 +133,7 @@ func _on_player_detector_body_entered(_body):
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	print(body.name)
-	print(boss_life)
-	player_hit = true
-	boss_life -= 5
+	if Globals.boss_life >= 0:
+		print(Globals.boss_life)
+		player_hit = true
+		Globals.boss_life -= 10
