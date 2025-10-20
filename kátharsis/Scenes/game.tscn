@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsn2ij26iveii"]
+[gd_scene load_steps=12 format=3 uid="uid://dsn2ij26iveii"]
 
 [ext_resource type="Texture2D" uid="uid://ccj61b1ihjlmo" path="res://Assets/Assets Gamelab/Backgrounds/BG - Cave/cave_layer1.png" id="1_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://8ykislrf6tt" path="res://Assets/Assets Gamelab/Tilesets/Tilled_stone.png" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://betweb2nvc8a1" path="res://Scripts/game.gd" id="1_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://c881hstf5vq36" path="res://Actors/player.tscn" id="2_qxrlw"]
 [ext_resource type="Texture2D" uid="uid://c4uiuab6s4bmk" path="res://Assets/Assets Gamelab/Backgrounds/BG - Cave/cave_layer2.png" id="2_v158k"]
 [ext_resource type="Texture2D" uid="uid://baoiog05joikh" path="res://Assets/Assets Gamelab/Backgrounds/BG - Cave/cave_layer3.png" id="3_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://b7nlta0pfn5pe" path="res://Actors/boss_preguica.tscn" id="4_3dryh"]
 [ext_resource type="Texture2D" uid="uid://dflr6ca23g7rp" path="res://Assets/Assets Gamelab/Backgrounds/BG - Cave/cave_layer4.png" id="4_ldgsr"]
+[ext_resource type="FontFile" uid="uid://w4ifd2ph5gsr" path="res://Assets/Fonts/RevMiniPixel.ttf" id="8_v158k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 texture = ExtResource("1_ebmjs")
@@ -82,6 +84,7 @@ physics_layer_0/collision_mask = 8
 sources/0 = SubResource("TileSetAtlasSource_qxrlw")
 
 [node name="game" type="Node2D"]
+script = ExtResource("1_h4fw4")
 
 [node name="bg" type="Node2D" parent="."]
 
@@ -145,8 +148,13 @@ grow_horizontal = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control/MarginContainer"]
 layout_mode = 2
 
-[node name="txt_catarse" type="Label" parent="HUD/Control/MarginContainer/VBoxContainer"]
+[node name="txt_catarse" type="Label" parent="HUD/Control"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_left = 910.0
+offset_top = 25.0
+offset_right = 1070.0
+offset_bottom = 89.0
+theme_override_fonts/font = ExtResource("8_v158k")
 theme_override_font_sizes/font_size = 64
-text = "00%"
+text = "000%"

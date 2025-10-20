@@ -48,7 +48,7 @@ func _ready() -> void:
 	gravity = (jump_height * 2) / pow(max_time_to_peak, 2)
 	fall_gravity = gravity * 2
 
-
+signal players_has_died()
 
 func _process(_delta: float) -> void:
 	handle_animation()
@@ -176,7 +176,8 @@ func take_damage(knockback_force := Vector2.ZERO,duration := 0.25):#aula 10
 	if Globals.player_life > 0:
 		Globals.player_life -= 1
 	else:
-		queue_free()
+		get_tree().change_scene_to_file.call_deferred("res://Scenes/derrota.tscn")
+		return
 	if knockback_force != Vector2.ZERO:
 		knockback_vector = knockback_force
 		var knockback_tween := get_tree().create_tween()

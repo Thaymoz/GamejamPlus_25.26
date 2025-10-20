@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ms5p7owvgs5r"]
+[gd_scene load_steps=7 format=3 uid="uid://ms5p7owvgs5r"]
 
 [ext_resource type="Texture2D" uid="uid://bohgd3ek4gwkl" path="res://Assets/Frame 2 (1).png" id="1_1rerr"]
+[ext_resource type="Script" uid="uid://cgfkjltur4hk8" path="res://Scripts/menu.gd" id="1_xhh6f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xhh6f"]
 
@@ -17,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xhh6f")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -41,3 +43,5 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_cayip")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_158mb")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wwsa2")
 text = "PLAY"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

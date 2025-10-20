@@ -1,0 +1,117 @@
+[gd_scene load_steps=23 format=3 uid="uid://fyoanyfhwppj"]
+
+[ext_resource type="Script" uid="uid://ct14cucuxwxir" path="res://Scripts/derrota.gd" id="1_5k4t0"]
+[ext_resource type="Texture2D" uid="uid://ccj61b1ihjlmo" path="res://Assets/Assets Gamelab/Backgrounds/BG - Cave/cave_layer1.png" id="1_bk58n"]
+[ext_resource type="FontFile" uid="uid://w4ifd2ph5gsr" path="res://Assets/Fonts/RevMiniPixel.ttf" id="2_5k4t0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5k4t0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cnv4f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a0cr0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_517wv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ge73l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_usr35"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0g73"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xu4at"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s2oks"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h0sf3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g04k0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qr4b4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tg4h5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3hyi4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dr8oe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u72jc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hdqb2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u20us"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rb0fg"]
+
+[node name="Derrota" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5k4t0")
+
+[node name="CaveLayer1" type="Sprite2D" parent="."]
+modulate = Color(0.0885599, 0.0885599, 0.0885599, 1)
+position = Vector2(1005.5, 539.5)
+scale = Vector2(8.2625, 7.97778)
+texture = ExtResource("1_bk58n")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 174.0
+offset_right = 1321.0
+offset_bottom = 270.0
+theme_override_fonts/font = ExtResource("2_5k4t0")
+theme_override_font_sizes/font_size = 96
+text = "VOCE PERDEU"
+
+[node name="btn_denovo" type="Button" parent="."]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 463.0
+offset_right = 1272.0
+offset_bottom = 535.0
+theme_override_colors/font_hover_color = Color(0.933333, 0.372549, 0.105882, 1)
+theme_override_colors/font_pressed_color = Color(0.815686, 0.0509804, 0.129412, 1)
+theme_override_fonts/font = ExtResource("2_5k4t0")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5k4t0")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_cnv4f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_a0cr0")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_517wv")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ge73l")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_usr35")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l0g73")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_xu4at")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s2oks")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_h0sf3")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g04k0")
+text = "MAIS UMA VEZ!"
+
+[node name="btn_menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 618.0
+offset_right = 1272.0
+offset_bottom = 690.0
+theme_override_colors/font_hover_color = Color(0.933333, 0.372549, 0.105882, 1)
+theme_override_colors/font_pressed_color = Color(0.815686, 0.0509804, 0.129412, 1)
+theme_override_fonts/font = ExtResource("2_5k4t0")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qr4b4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_tg4h5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3hyi4")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_dr8oe")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_u72jc")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_hdqb2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l0g73")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_u20us")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s2oks")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_rb0fg")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g04k0")
+text = "VOLTAR AO MENU"
+
+[connection signal="pressed" from="btn_denovo" to="." method="_on_btn_denovo_pressed"]
+[connection signal="pressed" from="btn_menu" to="." method="_on_btn_menu_pressed"]

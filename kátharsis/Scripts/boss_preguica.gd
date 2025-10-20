@@ -137,3 +137,4 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 		print(Globals.boss_life)
 		player_hit = true
 		Globals.boss_life -= 10
+		get_tree().change_scene_to_file("res://Scenes/vitoria.tscn")
