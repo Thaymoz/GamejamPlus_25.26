@@ -151,10 +151,32 @@ layout_mode = 2
 [node name="txt_catarse" type="Label" parent="HUD/Control"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 910.0
-offset_top = 25.0
-offset_right = 1070.0
-offset_bottom = 89.0
+offset_left = 898.0
+offset_top = 29.0
+offset_right = 1058.0
+offset_bottom = 93.0
 theme_override_fonts/font = ExtResource("8_v158k")
 theme_override_font_sizes/font_size = 64
 text = "000%"
+
+[node name="txt_life" type="Label" parent="HUD/Control"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 150.0
+offset_top = 33.0
+offset_right = 366.0
+offset_bottom = 97.0
+theme_override_fonts/font = ExtResource("8_v158k")
+theme_override_font_sizes/font_size = 64
+text = "VIDA: 5"
+
+[node name="txt_boss" type="Label" parent="HUD/Control"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 1562.0
+offset_top = 30.0
+offset_right = 1834.0
+offset_bottom = 94.0
+theme_override_fonts/font = ExtResource("8_v158k")
+theme_override_font_sizes/font_size = 64
+text = "BOSS: 50"

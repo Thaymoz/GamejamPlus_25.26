@@ -171,8 +171,18 @@ theme_override_fonts/font = ExtResource("7_ys4pu")
 theme_override_font_sizes/font_size = 64
 text = "000%"
 
+[node name="txt_life" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 146.0
+offset_top = 65.0
+offset_right = 362.0
+offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("7_ys4pu")
+theme_override_font_sizes/font_size = 64
+text = "VIDA: 5"
+
 [node name="move" type="Node2D" parent="."]
-position = Vector2(629, 695)
+position = Vector2(629, 759)
 scale = Vector2(0.3, 0.3)
 
 [node name="Frame4" type="Sprite2D" parent="move"]
@@ -197,7 +207,7 @@ offset_right = 190.0
 offset_bottom = -401.667
 theme_override_fonts/font = ExtResource("7_ys4pu")
 theme_override_font_sizes/font_size = 128
-text = "MOVE"
+text = "ANDAR"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -215,7 +225,7 @@ offset_right = 265.333
 offset_bottom = -161.667
 theme_override_fonts/font = ExtResource("7_ys4pu")
 theme_override_font_sizes/font_size = 128
-text = "ATTACK"
+text = "ATACAR"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -224,13 +234,13 @@ position = Vector2(1636, 695)
 scale = Vector2(0.3, 0.3)
 
 [node name="Label3" type="Label" parent="dash"]
-offset_left = -250.0
+offset_left = -330.0
 offset_top = -310.0
-offset_right = 262.0
+offset_right = 326.0
 offset_bottom = -135.0
 theme_override_fonts/font = ExtResource("7_ys4pu")
 theme_override_font_sizes/font_size = 128
-text = "DASH"
+text = "INVESTIDA"
 horizontal_alignment = 1
 vertical_alignment = 1
 

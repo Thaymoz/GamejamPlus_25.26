@@ -6,6 +6,7 @@
 [node name="ghost_effect" type="Sprite2D"]
 modulate = Color(0.156863, 0.156863, 0.156863, 0.647059)
 show_behind_parent = true
+z_index = 9
 scale = Vector2(4, 4)
 texture = ExtResource("1_qldqd")
 hframes = 8

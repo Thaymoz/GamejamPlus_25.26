@@ -16,6 +16,8 @@ const CATARSE_SHOOT = preload("res://Prefarbs/catarse_shoot.tscn")
 @onready var txt_catarse: Label = %txt_catarse
 @onready var catarse_drain: Timer = $catarse_drain
 @onready var point_shoot: Marker2D = %point_shoot
+@onready var txt_life: Label = %txt_life
+@onready var catarse_particles: GPUParticles2D = $"catarse particles"
 
 
 #Variaveis do pulo
@@ -54,7 +56,9 @@ func _process(_delta: float) -> void:
 	handle_animation()
 	if Input.is_action_just_pressed("catarse_mode") and catarse >= 100:
 		is_catarse_mode = true
+		catarse_particles.emitting = true
 		catarse_drain.start()
+		
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -124,10 +128,11 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
-		print("player bateu:", body.name, "e ganhou tantos pontos de catarse", catarse)
+		Globals.boss_life -= 1
 		if catarse < CATARSE_MAX and is_catarse_mode == false:
-			catarse += randi_range(2,7)
-			txt_catarse.text = str(min(catarse, CATARSE_MAX), "%")
+			catarse += randi_range(7,14)
+			var valor_catarse = min(catarse, CATARSE_MAX)
+			txt_catarse.text = "%03d%%" % valor_catarse
 			print("player bateu:", body.name, "e ganhou tantos pontos de catarse", catarse)
 
 func add_ghost():
@@ -162,6 +167,7 @@ func _on_catarse_drain_timeout() -> void:
 		txt_catarse.text = str(catarse)
 		if catarse == 0:
 			is_catarse_mode = false
+			catarse_particles.emitting = false
 			catarse_drain.stop()
 
 func catarse_attack():
@@ -175,6 +181,7 @@ func catarse_attack():
 func take_damage(knockback_force := Vector2.ZERO,duration := 0.25):#aula 10
 	if Globals.player_life > 0:
 		Globals.player_life -= 1
+		txt_life.text = str("VIDA: ",Globals.player_life)
 	else:
 		get_tree().change_scene_to_file.call_deferred("res://Scenes/derrota.tscn")
 		return

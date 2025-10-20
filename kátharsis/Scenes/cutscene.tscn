@@ -235,9 +235,9 @@ quem realmente é o verdadeiro
 
 [node name="Label2" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
-offset_left = 1200.0
+offset_left = 1176.0
 offset_top = 399.0
-offset_right = 1625.0
+offset_right = 1601.0
 offset_bottom = 544.0
 theme_override_fonts/font = ExtResource("4_iy4n7")
 theme_override_font_sizes/font_size = 24

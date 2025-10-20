@@ -475,22 +475,28 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_1c8hm"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.11399, 0.243523, 0.362694, 0.497409, 0.65285, 0.792746, 0.880829, 0.92228, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.815686, 0.0509804, 0.129412, 1, 0.933333, 0.372549, 0.105882, 1, 0.933333, 0.8, 0.105882, 1, 0.152941, 0.8, 0.105882, 1, 0.152941, 0.8, 0.898039, 1, 0.152941, 0.156863, 0.898039, 1, 0.513726, 0.0666667, 0.960784, 1, 0, 0, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_sinrj"]
 gradient = SubResource("Gradient_1c8hm")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ks2ow"]
 particle_flag_disable_z = true
+emission_shape_scale = Vector3(3, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
 direction = Vector3(0, -1, 0)
-initial_velocity_min = 10.0
+spread = 13.454
+initial_velocity_min = 25.0
 initial_velocity_max = 40.0
 gravity = Vector3(0, 0, 0)
-scale_min = 4.0
-scale_max = 4.0
+scale_min = 1.5
+scale_max = 5.0
 color_ramp = SubResource("GradientTexture1D_sinrj")
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
+z_index = 10
 scale = Vector2(4, 4)
 collision_mask = 201
 script = ExtResource("1_y2lmi")
@@ -534,7 +540,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="ghost_timer" type="Timer" parent="."]
-wait_time = 0.07
+wait_time = 0.05
 
 [node name="dash_particles" type="GPUParticles2D" parent="."]
 show_behind_parent = true
@@ -543,10 +549,18 @@ emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_ks2ow")
 
+[node name="catarse particles" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(-0.75, 2.5)
+emitting = false
+amount = 50
+lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_ks2ow")
+
 [node name="dash_cd" type="Timer" parent="."]
 
 [node name="catarse_drain" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 
 [connection signal="body_entered" from="texture/ab_hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="texture/hurtbox" to="." method="_on_hurtbox_body_entered"]

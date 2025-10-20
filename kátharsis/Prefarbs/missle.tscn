@@ -8,7 +8,7 @@ radius = 9.00001
 height = 48.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_si7tt"]
-size = Vector2(55, 18)
+size = Vector2(58, 18)
 
 [node name="missle" type="AnimatableBody2D"]
 collision_layer = 8
@@ -31,7 +31,7 @@ collision_layer = 8
 collision_mask = 131
 
 [node name="collision" type="CollisionShape2D" parent="collision_detector"]
-position = Vector2(-3.5, 0)
+position = Vector2(-5, 0)
 shape = SubResource("RectangleShape2D_si7tt")
 debug_color = Color(0.586775, 0.454576, 0.805379, 0.42)
 
